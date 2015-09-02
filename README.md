@@ -1,8 +1,8 @@
 # SimpleNotepad
 A clone of windos notepad
-- supports cross-platform line endings.
-- uses nio
-- native LaF
+- Supports cross-platform line endings.
+- Uses nio.
+- Provides native LaF.
 
 # Requirements
 JDK Version 8+
