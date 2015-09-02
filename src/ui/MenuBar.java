@@ -17,7 +17,7 @@ import util.Writer;
 public class MenuBar extends JMenuBar {
 	private JMenu file, edit, format, view, help;
 	private JMenuItem newFile, open, save, saveAs, pageSetup, print, exit;
-	private JMenuItem undo, cut, copy, paste, delete, find, findNext, replace, goTo, selectael, timeDate;
+	private JMenuItem undo, cut, copy, paste, delete, find, findNext, replace, goTo, selectAll, timeDate;
 	private JMenuItem wordWrap, font;
 	private JMenuItem statusBar;
 	private JMenuItem about;
@@ -65,8 +65,8 @@ public class MenuBar extends JMenuBar {
 		replace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 		goTo = new JMenuItem("Go To...");
 		goTo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
-		selectael = new JMenuItem("Select all");
-		selectael.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+		selectAll = new JMenuItem("Select all");
+		selectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		timeDate = new JMenuItem("Time/Date");
 		timeDate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.getKeyText(KeyEvent.VK_F5)));
 
@@ -114,7 +114,7 @@ public class MenuBar extends JMenuBar {
 		edit.add(replace);
 		edit.add(goTo);
 		edit.addSeparator();
-		edit.add(selectael);
+		edit.add(selectAll);
 		edit.add(timeDate);
 		timeDate.addActionListener((ae) -> {
 			JTextArea textArea = owner.getTextArea();
