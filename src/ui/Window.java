@@ -2,12 +2,16 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import ui.dnd.FileDrop;
+import util.Reader;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame {
@@ -36,6 +40,16 @@ public class Window extends JFrame {
 	private void init() {
 		menu = new MenuBar(this);
 		textArea = new JTextArea();
+		new FileDrop(textArea, new FileDrop.Listener() {
+			
+			@Override
+			public void filesDropped(File[] files) {
+				File f = files[0];
+				textArea.setText(Reader.readFile(f.getAbsolutePath()));
+				setCurrentFilePath(f.toPath().toAbsolutePath().toString());
+				setTitle(f.getName());
+			}
+		});
 		textAreaScrollPane = new JScrollPane(textArea);
 		fontChooser = new FontDialog();
 		fileOpenDialog = new FileOpenDialog(this);
