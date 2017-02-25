@@ -12,7 +12,7 @@ public class Writer {
 		try {
 			Files.write(path, data.getBytes());
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	

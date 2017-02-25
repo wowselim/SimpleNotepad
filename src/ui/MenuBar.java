@@ -3,6 +3,7 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import javax.swing.JMenu;
@@ -119,13 +120,7 @@ public class MenuBar extends JMenuBar {
 		timeDate.addActionListener((ae) -> {
 			JTextArea textArea = owner.getTextArea();
 			int caretPos = textArea.getCaretPosition();
-			LocalDateTime timePoint = LocalDateTime.now();
-			String hour = String.format("%02d", timePoint.getHour());
-			String minute = String.format("%02d", timePoint.getMinute());
-			String day = String.format("%02d", timePoint.getDayOfMonth());
-			String month = String.format("%02d", timePoint.getMonth().getValue());
-			String year = String.valueOf(timePoint.getYear());
-			String dateAsString = String.format("%s:%s %s.%s.%s", hour, minute, day, month, year);
+			String dateAsString = DateTimeFormatter.ofPattern("HH:mm dd.MM.uuuu").format(LocalDateTime.now());
 			textArea.insert(dateAsString, caretPos);
 		});
 

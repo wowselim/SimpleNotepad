@@ -14,11 +14,13 @@ public class FileOpenDialog extends JFileChooser {
 	public FileOpenDialog(Window owner) {
 		super(new File("."));
 		this.owner = owner;
-		this.addActionListener((al) -> {
+		this.addActionListener((ae) -> {
 			File selectedFile = getSelectedFile();
-			owner.getTextArea().setText(Reader.readFile(selectedFile.getAbsolutePath()));
-			owner.setCurrentFilePath(selectedFile.toPath().toAbsolutePath().toString());
-			owner.setTitle(selectedFile.getName());
+			if (selectedFile != null) {
+				owner.getTextArea().setText(Reader.readFile(selectedFile.getAbsolutePath()));
+				owner.setCurrentFilePath(selectedFile.toPath().toAbsolutePath().toString());
+				owner.setTitle(selectedFile.getName());
+			}
 		});
 	}
 

@@ -12,9 +12,9 @@ public class FileSaveDialog extends JFileChooser {
 	private Window owner;
 
 	public FileSaveDialog(Window owner) {
-		super(new File("."));
+		super(new File(System.getProperty("user.home")));
 		this.owner = owner;
-		this.addActionListener((al) -> {
+		this.addActionListener((ae) -> {
 			File selectedFile = getSelectedFile();
 			Writer.write(owner.getTextArea().getText(), selectedFile.getAbsolutePath());
 			owner.setTitle(selectedFile.getName());

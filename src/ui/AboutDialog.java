@@ -1,7 +1,7 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -9,41 +9,38 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.BevelBorder;
+
+import util.Icons;
 
 @SuppressWarnings("serial")
 public class AboutDialog extends JDialog {
-	private final String email = "wowselim@gmail.com";
+	private final String EMAIL = "wowselim@gmail.com";
 	private final String COMPANY = "\u00A9 Selim Dincer";
-	private final int YEAR = 2015;
-	private final String INFO = "This is a simple clone of the default Windows Notepad.\n"
-			+ "It features support for cross-platform line-endings.";
+	private final String YEAR = "2015-2017";
+	private final String INFO = "<html>This is a simple clone of the default Windows Notepad.<br>"
+			+ "It features support for cross-platform line-endings.</html>";
 
-	private final JLabel companyLabel = new JLabel(COMPANY + " - " + YEAR + " - " + email);
-	private final JTextArea infoPane = new JTextArea(INFO);
+	private final JLabel companyLabel = new JLabel(COMPANY + " - " + YEAR + " - " + EMAIL);
+	private final JLabel infoLabel = new JLabel(INFO);
 	private final JPanel buttonPanel = new JPanel();
 	private final JButton closeButton = new JButton("Close");
 
 	public AboutDialog(Window owner) {
 		super(owner, "About SimpleNotepad", true);
 
-		// I don't know why this works:
-		setLayout(new GridLayout(0, 1));
+		setLayout(new BorderLayout(5, 5));
 
-		companyLabel.setIcon(new ImageIcon(Base64Icons.getIcon(Base64Icons.icon32)));
-		companyLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-		add(companyLabel);
-		add(infoPane);
-		infoPane.setEditable(false);
-		infoPane.setBackground(this.getBackground());
-		infoPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		companyLabel.setIcon(new ImageIcon(Icons.getIcons().get(3)));
+		companyLabel.setBorder(BorderFactory.createEmptyBorder(15, 16, 0, 8));
+		add(companyLabel, BorderLayout.NORTH);
+		add(infoLabel, BorderLayout.CENTER);
+		infoLabel.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		buttonPanel.add(closeButton);
-		add(buttonPanel);
+		add(buttonPanel, BorderLayout.SOUTH);
 		closeButton.addActionListener((al) -> this.dispose());
 		pack();
-		setMinimumSize(getSize());
+		setResizable(false);
 		setLocationRelativeTo(owner);
 	}
 }

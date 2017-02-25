@@ -3,7 +3,6 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import ui.dnd.FileDrop;
+import util.Icons;
 import util.Reader;
 
 @SuppressWarnings("serial")
@@ -26,9 +26,7 @@ public class Window extends JFrame {
 	public Window() {
 		super("Untitled - SimpleNotepad");
 		List<Image> icons = null;
-		icons = Arrays.asList(Base64Icons.getIcon(Base64Icons.icon16), Base64Icons.getIcon(Base64Icons.icon32),
-				Base64Icons.getIcon(Base64Icons.icon48), Base64Icons.getIcon(Base64Icons.icon64),
-				Base64Icons.getIcon(Base64Icons.icon128));
+		icons = Icons.getIcons();
 		setIconImages(icons);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(640, 480);
@@ -41,7 +39,6 @@ public class Window extends JFrame {
 		menu = new MenuBar(this);
 		textArea = new JTextArea();
 		new FileDrop(textArea, new FileDrop.Listener() {
-			
 			@Override
 			public void filesDropped(File[] files) {
 				File f = files[0];

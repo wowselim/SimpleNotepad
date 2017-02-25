@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 
+import ui.dnd.FileDrop.TransferableObject;
+
 /**
  * This class makes it easy to drag and drop files from the operating system to
  * a Java program. Any <tt>java.awt.Component</tt> can be dropped onto, but only
@@ -100,8 +102,8 @@ public class FileDrop {
 	public FileDrop(final java.awt.Component c, final boolean recursive, final Listener listener) {
 		this(null, // Logging stream
 				c, // Drop target
-				javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor), // Drag
-																								// border
+				javax.swing.BorderFactory.createEmptyBorder(), // Drag
+																// border
 				recursive, // Recursive
 				listener);
 	} // end constructor
@@ -125,7 +127,7 @@ public class FileDrop {
 	public FileDrop(final java.io.PrintStream out, final java.awt.Component c, final Listener listener) {
 		this(out, // Logging stream
 				c, // Drop target
-				javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor), false, // Recursive
+				javax.swing.BorderFactory.createEmptyBorder(), false, // Recursive
 				listener);
 	} // end constructor
 
@@ -154,8 +156,8 @@ public class FileDrop {
 			final Listener listener) {
 		this(out, // Logging stream
 				c, // Drop target
-				javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor), // Drag
-																								// border
+				javax.swing.BorderFactory.createEmptyBorder(), // Drag
+																// border
 				recursive, // Recursive
 				listener);
 	} // end constructor
