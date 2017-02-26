@@ -86,24 +86,28 @@ public class MenuBar extends JMenuBar {
 
 		file.add(newFile);
 		file.add(open);
-		open.addActionListener((ae) -> owner.getFileOpenDialog().showOpenDialog(owner));
+		open.addActionListener(ae -> owner.getFileOpenDialog().showOpenDialog(owner));
 		file.add(save);
-		save.addActionListener((ae) -> {
+		save.addActionListener(ae -> {
 			if (Objects.isNull(owner.getCurrentFilePath()))
 				owner.getFileSaveDialog().showSaveDialog(owner);
 			else
 				Writer.write(owner.getTextArea().getText(), owner.getCurrentFilePath());
 		});
 		file.add(saveAs);
-		saveAs.addActionListener((ae) -> owner.getFileSaveDialog().showSaveDialog(owner));
+		saveAs.addActionListener(ae -> owner.getFileSaveDialog().showSaveDialog(owner));
 		file.addSeparator();
 		file.add(pageSetup);
 		file.add(print);
 		file.addSeparator();
 		file.add(exit);
-		exit.addActionListener((ae) -> owner.dispose());
+		exit.addActionListener(ae -> owner.dispose());
 
 		edit.add(undo);
+		undo.addActionListener(ae -> {
+			if (owner.getUndoManager().canUndo())
+				owner.getUndoManager().undo();
+		});
 		edit.addSeparator();
 		edit.add(cut);
 		edit.add(copy);
@@ -117,7 +121,7 @@ public class MenuBar extends JMenuBar {
 		edit.addSeparator();
 		edit.add(selectAll);
 		edit.add(timeDate);
-		timeDate.addActionListener((ae) -> {
+		timeDate.addActionListener(ae -> {
 			JTextArea textArea = owner.getTextArea();
 			int caretPos = textArea.getCaretPosition();
 			String dateAsString = DateTimeFormatter.ofPattern("HH:mm dd.MM.uuuu").format(LocalDateTime.now());
@@ -125,9 +129,9 @@ public class MenuBar extends JMenuBar {
 		});
 
 		format.add(wordWrap);
-		wordWrap.addActionListener((ae) -> owner.getTextArea().setLineWrap(!owner.getTextArea().getLineWrap()));
+		wordWrap.addActionListener(ae -> owner.getTextArea().setLineWrap(!owner.getTextArea().getLineWrap()));
 		format.add(font);
-		font.addActionListener((ae) -> {
+		font.addActionListener(ae -> {
 			JFontChooser fc = owner.getFontChooser();
 			if (fc.showDialog(owner) == JFontChooser.OK_OPTION)
 				owner.getTextArea().setFont(fc.getSelectedFont());
@@ -136,7 +140,7 @@ public class MenuBar extends JMenuBar {
 		view.add(statusBar);
 
 		help.add(about);
-		about.addActionListener((ae) -> new AboutDialog(owner).setVisible(true));
+		about.addActionListener(ae -> new AboutDialog(owner).setVisible(true));
 
 		add(file);
 		add(edit);
