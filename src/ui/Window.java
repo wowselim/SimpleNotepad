@@ -38,14 +38,11 @@ public class Window extends JFrame {
 	private void init() {
 		menu = new MenuBar(this);
 		textArea = new JTextArea();
-		new FileDrop(textArea, new FileDrop.Listener() {
-			@Override
-			public void filesDropped(File[] files) {
+		new FileDrop(textArea, (files) -> {
 				File f = files[0];
 				textArea.setText(Reader.readFile(f.getAbsolutePath()));
 				setCurrentFilePath(f.toPath().toAbsolutePath().toString());
 				setTitle(f.getName());
-			}
 		});
 		textAreaScrollPane = new JScrollPane(textArea);
 		fontChooser = new FontDialog();
