@@ -1,7 +1,5 @@
 package ui.dnd;
 
-import static java.awt.datatransfer.DataFlavor.stringFlavor;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.datatransfer.DataFlavor;
@@ -25,6 +23,7 @@ import java.util.EventObject;
 import java.util.List;
 import java.util.TooManyListenersException;
 
+import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 /**
@@ -61,7 +60,7 @@ public class FileDrop {
 	 * @since 1.0
 	 */
 	public FileDrop(final Component c, final Listener listener) {
-		this(c, javax.swing.BorderFactory.createEmptyBorder(), true, listener);
+		this(c, BorderFactory.createEmptyBorder(), true, listener);
 	}
 
 	/**
@@ -472,9 +471,9 @@ public class FileDrop {
 		 */
 		public java.awt.datatransfer.DataFlavor[] getTransferDataFlavors() {
 			if (customFlavor != null)
-				return new DataFlavor[] { customFlavor, DATA_FLAVOR, stringFlavor };
+				return new DataFlavor[] { customFlavor, DATA_FLAVOR, DataFlavor.stringFlavor };
 			else
-				return new DataFlavor[] { DATA_FLAVOR, stringFlavor };
+				return new DataFlavor[] { DATA_FLAVOR, DataFlavor.stringFlavor };
 		}
 
 		/**
@@ -492,7 +491,7 @@ public class FileDrop {
 		public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 			if (flavor.equals(DATA_FLAVOR))
 				return fetcher == null ? data : fetcher.getObject();
-			if (flavor.equals(stringFlavor))
+			if (flavor.equals(DataFlavor.stringFlavor))
 				return fetcher == null ? data.toString() : fetcher.getObject().toString();
 			throw new UnsupportedFlavorException(flavor);
 		}
@@ -510,7 +509,7 @@ public class FileDrop {
 		public boolean isDataFlavorSupported(DataFlavor flavor) {
 			if (flavor.equals(DATA_FLAVOR))
 				return true;
-			if (flavor.equals(stringFlavor))
+			if (flavor.equals(DataFlavor.stringFlavor))
 				return true;
 			return false;
 		}
