@@ -8,12 +8,8 @@ import util.Reader;
 
 @SuppressWarnings("serial")
 public class FileOpenDialog extends JFileChooser {
-	@SuppressWarnings("unused")
-	private Window owner;
-
 	public FileOpenDialog(Window owner) {
-		super(new File("."));
-		this.owner = owner;
+		super(new File(System.getProperty("user.home")));
 		this.addActionListener((ae) -> {
 			File selectedFile = getSelectedFile();
 			if (selectedFile != null) {
@@ -23,5 +19,4 @@ public class FileOpenDialog extends JFileChooser {
 			}
 		});
 	}
-
 }
